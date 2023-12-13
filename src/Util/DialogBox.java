@@ -50,9 +50,6 @@ public class DialogBox {
             case 2:
                 // User selected Industrial Building
                 return handleIndustrialBuildingConfirmation();
-            case 3:
-                // User selected Park
-                return handleParkBuildingConfirmation();
             // Add cases for other building types if needed
             default:
                 return -1; // Default value for invalid choice
@@ -104,7 +101,7 @@ public class DialogBox {
         return confirmChoice;
     }
 
-    private static int handleParkBuildingConfirmation() {
+    public static int handleParkBuildingConfirmation() {
         // Ask the user to input the green space value
         String input = JOptionPane.showInputDialog(
                 null,

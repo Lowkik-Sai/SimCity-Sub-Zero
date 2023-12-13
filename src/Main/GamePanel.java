@@ -8,18 +8,30 @@ import java.awt.event.MouseEvent;
 public class GamePanel {
 
     private JPanel panel;
-    private Point lastClickedCoordinates; // Added to store the last clicked coordinates
-    private String[][] mapArray; // Added to store the mapArray
-    private JFrame frame; // Added to store the JFrame
+    private Point lastClickedCoordinates;
+    private String[][] mapArray;
+    private JFrame frame;
 
     public GamePanel(String[][] mapArray) {
-        this.mapArray = mapArray; // Initialize the mapArray
+        this.mapArray = mapArray;
         this.panel = new JPanel();
-        this.lastClickedCoordinates = new Point(-1, -1); // Initialize to invalid coordinates
+        this.lastClickedCoordinates = new Point(-1, -1);
+
+        initializeFrame();
+        fillPanel();
+        mouseTracker();
+        displayPanel();  // Call displayPanel after initializing the frame
+    }
+
+    private void initializeFrame() {
+        frame = new JFrame("Sim-City");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
     }
 
     private void fillPanel() {
-    	panel.removeAll();
+        panel.removeAll();
         panel.setLayout(new GridLayout(mapArray.length, mapArray[0].length));
 
         for (int i = 0; i < mapArray.length; i++) {
@@ -29,51 +41,42 @@ public class GamePanel {
                 panel.add(label);
             }
         }
-    }
 
-    // Function to display the gamePanel.
-    public void displayPanel() {
-        fillPanel();
-
-        frame = new JFrame("Sim-City");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(panel);
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        // Call the MouseTracker method
-        mouseTracker();
-    }
-
-    // Method to update the panel with a new mapArray
-    public void updatePanel(String[][] newMapArray) {
-        this.mapArray = newMapArray;
-        fillPanel();
+        panel.revalidate();
+        panel.repaint();
     }
 
     private void mouseTracker() {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Calculate the cell width and height based on the map size
                 int cellWidth = frame.getContentPane().getWidth() / mapArray[0].length;
                 int cellHeight = frame.getContentPane().getHeight() / mapArray.length;
 
-                // Calculate the coordinates of the clicked cell
                 int x = (int) (e.getY() / cellWidth);
                 int y = (int) (e.getX() / cellHeight);
+                if(y >= 8){
+                    lastClickedCoordinates.setLocation(x, y - 1);
+                }
+                else{
+                    lastClickedCoordinates.setLocation(x, y);
+                }
 
-                // Update the last clicked coordinates
-                lastClickedCoordinates.setLocation(x, y);
-
-                // Display the coordinates
                 System.out.println("Clicked at coordinates: (" + x + ", " + y + ")");
             }
         });
     }
 
-    // Method to get the last clicked coordinates
+    public void displayPanel() {
+        frame.getContentPane().add(panel);
+        frame.setVisible(true);
+    }
+
+    public void updatePanel(String[][] newMapArray) {
+        this.mapArray = newMapArray;
+        fillPanel();
+    }
+
     public Point getLastClickedCoordinates() {
         return lastClickedCoordinates;
     }

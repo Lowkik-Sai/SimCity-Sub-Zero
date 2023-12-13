@@ -7,7 +7,8 @@ public class GameMap {
 
     private String[][] GameMap;
     private GamePanel panel;
-    private Points points; // Added Points class
+    private Points points;
+    private int timeCounter = 0;
 
     public GameMap(int size) {
         this.GameMap = new String[size][size];
@@ -106,5 +107,14 @@ public class GameMap {
     // Getter for the Points instance
     public Points getPoints() {
         return this.points;
+    }
+
+    public void simulateTime() {
+        // Update the state of your game to simulate the passage of time
+        // This is where you can implement logic for buildings aging, resource production, etc.
+
+        // For example, let's increment a time counter in this simple demonstration
+        timeCounter++;
+        System.out.println("Time is now: " + timeCounter);
     }
 }
