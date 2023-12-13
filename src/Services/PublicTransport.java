@@ -97,7 +97,7 @@ public class PublicTransport extends Service {
         	if(capital.getCapital() - upgradeCost < 0) {
         		return 0;
         	}
-        	capital.setCapital(capital.getCapital() - upgradeCost);
+        	capital.addToCapital(capital.getCapital() - upgradeCost);
         	this.level++;
         	return 1;
         }
@@ -115,7 +115,7 @@ public class PublicTransport extends Service {
     		return ("Not Enough Capital Balance");
     	}
     	else {
-    		capital.setCapital(capital.getCapital() - destructionCost);
+    		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
     			return("Service Destroyed");
     		}

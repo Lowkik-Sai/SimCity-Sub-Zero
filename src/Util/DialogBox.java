@@ -20,7 +20,10 @@ public class DialogBox {
                 "Industrial Building",
                 "Park",
                 "Power Generator",
-                "School"
+                "School",
+                "Fire Department",
+                "Police Department",
+                "Hospital"
         };
 
         // Display the option dialog
@@ -50,6 +53,15 @@ public class DialogBox {
             case 2:
                 // User selected Industrial Building
                 return handleIndustrialBuildingConfirmation();
+            case 6:
+                // User selected Fire Department
+                return handleFireDepartmentConfirmation();
+            case 7:
+                // User selected Police Department
+                return handlePoliceDepartmentConfirmation();
+            case 8:
+                // User selected Hospital
+                return handleHospitalConfirmation();
             // Add cases for other building types if needed
             default:
                 return -1; // Default value for invalid choice
@@ -59,46 +71,47 @@ public class DialogBox {
     private static int handleResidentialBuildingConfirmation() {
         // Residential Building cost
         int buildCost = 5000;
-
-        // Display confirmation dialog for Residential Building with cost
-        int confirmChoice = JOptionPane.showConfirmDialog(
-                null,
-                "Build a Residential Building?\nCost: " + buildCost,
-                "Residential Building Confirmation",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        return confirmChoice;
+        return showConfirmationDialog("Residential Building", buildCost);
     }
 
     private static int handleCommercialBuildingConfirmation() {
         // Commercial Building cost
         int buildCost = 7000;
-
-        // Display confirmation dialog for Commercial Building with cost
-        int confirmChoice = JOptionPane.showConfirmDialog(
-                null,
-                "Build a Commercial Building?\nCost: " + buildCost,
-                "Commercial Building Confirmation",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        return confirmChoice;
+        return showConfirmationDialog("Commercial Building", buildCost);
     }
 
     private static int handleIndustrialBuildingConfirmation() {
         // Industrial Building cost
         int buildCost = 12000;
+        return showConfirmationDialog("Industrial Building", buildCost);
+    }
 
-        // Display confirmation dialog for Industrial Building with cost
-        int confirmChoice = JOptionPane.showConfirmDialog(
+    private static int handleFireDepartmentConfirmation() {
+        // Fire Department cost
+        int buildCost = 7000;
+        return showConfirmationDialog("Fire Department", buildCost);
+    }
+
+    private static int handlePoliceDepartmentConfirmation() {
+        // Police Department cost
+        int buildCost = 8000;
+        return showConfirmationDialog("Police Department", buildCost);
+    }
+
+    private static int handleHospitalConfirmation() {
+        // Hospital cost
+        int buildCost = 10000;
+        return showConfirmationDialog("Hospital", buildCost);
+    }
+
+    private static int showConfirmationDialog(String buildingName, int buildCost) {
+        // Display confirmation dialog with the specified cost
+        return JOptionPane.showConfirmDialog(
                 null,
-                "Build an Industrial Building?\nCost: " + buildCost,
-                "Industrial Building Confirmation",
+                "Build a " + buildingName + "?\nCost: " + buildCost,
+                buildingName + " Confirmation",
                 JOptionPane.YES_NO_OPTION
         );
-
-        return confirmChoice;
     }
 
     public static int handleParkBuildingConfirmation() {

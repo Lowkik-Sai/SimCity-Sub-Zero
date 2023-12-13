@@ -27,6 +27,8 @@ public class IndustrialBuilding extends Building{
 
     String[][] industrialBuilding = new String[side][side]; // Declaring a new industrial building using size
 
+    
+    //int Industry = (int) 1F300;
     for (int i = 0; i < industrialBuilding.length; i++) {
         for (int j = 0; j < industrialBuilding[i].length; j++) {
             industrialBuilding[i][j] = "L";

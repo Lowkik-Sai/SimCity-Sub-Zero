@@ -8,11 +8,12 @@ public class FireDepartment extends Service {
     private Location location;
     private GameMap GameMap;
 
-    public FireDepartment(String serviceID, int level, int fireFightingCoverage, int x, int y) {
+    public FireDepartment(String serviceID, int level, int fireFightingCoverage, Location location, GameMap gameMap) {
         super(serviceID, level, "FireDepartment");
         this.fireFightingCoverage = fireFightingCoverage;
         this.boostFireFightingCoverage = 5; 
-        this.location = new Location(x, y);
+        this.location = location;
+        this.GameMap = gameMap;
     }
 
     // Set location coordinates of the fire department
@@ -33,7 +34,7 @@ public class FireDepartment extends Service {
     }
 
     public boolean buildFireDepartment() {
-        int side = (int) Math.sqrt(this.fireFightingCoverage); // Calculating the length of the side of the fire department
+        int side = 2; // Calculating the length of the side of the fire department
 
         // Checks whether the area is available
         if (!(GameMap.isAreaAvailable(location.getX(), location.getY(), side, side))) {
@@ -42,24 +43,11 @@ public class FireDepartment extends Service {
 
         String[][] fireDepartment = new String[side][side]; // Declaring a new fire department using size
 
-        for (int i = 0; i <= fireDepartment.length - 1; i++) {
-            for (int j = 0; j <= fireDepartment[i].length - 1; j++) {
-                fireDepartment[i][j] = " ";
-            }
-        }
 
-        // Filling the fire department borders with '+' and the inside area with 'F'.
-        int departmentSize = fireFightingCoverage / 5;  // Adjust for the fire department size
-        for (int i = 1; i <= departmentSize; i++) {
-            for (int j = 1; j <= departmentSize; j++) {
-                if (i == 1 || i == departmentSize || j == 1 || j == departmentSize) {
-                    if (i < fireDepartment.length && j < fireDepartment[i].length) {
-                        fireDepartment[i][j] = " +";
-                    }
-                } else {
-                    fireDepartment[i][j] = "F";
-                }
-            }
+        for(int i = 0; i <= side - 1; i++) {
+        	for(int j = 0; j <= side - 1; j++) {
+        		fireDepartment[i][j] = "F";
+        	}
         }
 
         if (GameMap.placeObject(fireDepartment, location.getX(), location.getY())) {
@@ -77,7 +65,7 @@ public class FireDepartment extends Service {
         	if(capital.getCapital() - upgradeCost < 0) {
         		return 0;
         	}
-        	capital.setCapital(capital.getCapital() - upgradeCost);
+        	capital.addToCapital(capital.getCapital() - upgradeCost);
         	this.level++;
         	return 1;
         }
@@ -94,7 +82,7 @@ public class FireDepartment extends Service {
     		return ("Not Enough Capital Balance");
     	}
     	else {
-    		capital.setCapital(capital.getCapital() - destructionCost);
+    		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
     			return("Service Destroyed");
     		}
@@ -110,7 +98,7 @@ public class FireDepartment extends Service {
     @Override
     public boolean performDestruction() {
         this.level = 0;
-        int size = (int) Math.sqrt(fireFightingCoverage);
+        int size = 2;
         if (GameMap.destroyObject(size, size, location.getX(), location.getY())) {
             return true;
         }
