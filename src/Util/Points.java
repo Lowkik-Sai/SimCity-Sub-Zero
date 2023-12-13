@@ -6,9 +6,12 @@ import java.util.Map;
 public class Points {
 	
 	private Map<Point, Point> pointsMap;
+	private Map<String, String> unicodeMap;
 	
 	public Points() {
 		this.pointsMap = new HashMap<>();
+		this.unicodeMap =  new HashMap<>();
+		initializeunicodeMap();
 	}
 	
 	
@@ -30,5 +33,21 @@ public class Points {
 	
 	public Point getPoint(Point keyPoint) {
 		return pointsMap.get(keyPoint);
+	}
+	
+	public void initializeunicodeMap() {
+		unicodeMap.put("0x1F33F", "Park");
+		unicodeMap.put("0x0043", "Commercial Building");
+		unicodeMap.put("0x0052", "Residential Building");
+		unicodeMap.put("0x004C", "Industrial Building");
+		unicodeMap.put("0x2301", "Power Generator");
+		unicodeMap.put("0x1F3EB", "School");
+		unicodeMap.put("0x0046", "Fire Department");
+		unicodeMap.put("0x0050", "Police Department");
+		unicodeMap.put("0x0048", "Hospital");
+	}
+	
+	public String getBuildingName(String unicode) {
+		return unicodeMap.get(unicode);
 	}
 }

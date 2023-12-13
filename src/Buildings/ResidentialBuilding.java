@@ -49,7 +49,7 @@ public class ResidentialBuilding extends Building{
     
     public void payTaxes(int tax_amount) {
     	if(capital.getCapital() - tax_amount < 0) {
-    		capital.setCapital(capital.getCapital() - tax_amount);
+    		capital.addToCapital(capital.getCapital() - tax_amount);
     	}
     	else {
     		System.err.println("Not Enough Capital Balance");

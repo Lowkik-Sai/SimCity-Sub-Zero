@@ -68,6 +68,19 @@ public class GameMap {
         // The area is available
         return true;
     }
+    
+    
+    public Boolean isEmpty() {
+    	for(int i = 0; i <= GameMap.length - 1; i++) {
+    		for(int j = 0; j <= GameMap[0].length - 1; j++) {
+    			if(GameMap[i][j] != " ") {
+    				return false;
+    			}
+    		}
+    	}
+    	return true;
+    }
+    
 
     // Places the built object in the game map.
     public boolean placeObject(String[][] building, int x, int y) {
