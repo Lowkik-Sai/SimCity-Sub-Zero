@@ -78,12 +78,6 @@ public class App {
                 	H.buildHospital();
                 }
             }
-            else if(!(cityMap.isEmpty())) {
-            	Object_Identifier obj_Iden = new Object_Identifier();
-            	String unicode = obj_Iden.getUnicode(cityMap.getMap()[(int)lastClicked.getX()][(int)lastClicked.getY()]);
-            	String buildingName = points.getBuildingName(unicode);
-            	System.out.println("Clicked at:" + buildingName);
-            }
 
             try {
                 Thread.sleep(1000);
