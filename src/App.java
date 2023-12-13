@@ -7,10 +7,11 @@ import Util.*;
 import Buildings.*;
 import Infrastructure.*;
 import Infrastructure.Power.*;
+import Economy.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        int mapSize = 15; // Customizable Map Size for users
+        int mapSize = 15;
         GameMap cityMap = new GameMap(mapSize);
         cityMap.initializeMap();
         String[][] map = new String[mapSize][mapSize];
@@ -22,17 +23,18 @@ public class App {
 
         Map<Point, Integer> buildingFlags = new HashMap<>();
 
+        Capital cityCapital = new Capital();
+
         // Create a TimeSimulationThread instance
-        TimeSimulationThread timeThread = new TimeSimulationThread(cityMap, gamePanel);
+        TimeSimulationThread timeThread = new TimeSimulationThread(cityMap, gamePanel, cityCapital);
         timeThread.start();
 
-        // Keep checking for the last clicked coordinates in a loop until (14, 14) is clicked
         while (true) {
             Point lastClicked = gamePanel.getLastClickedCoordinates();
 
             if (lastClicked.equals(new Point(9, 9))) {
                 System.out.println("Exiting the loop. Coordinates (9, 9) clicked.");
-                timeThread.interrupt(); // Interrupt the time simulation thread before exiting
+                timeThread.interrupt();
                 break;
             }
 
@@ -58,7 +60,7 @@ public class App {
                     Park P = new Park("P", 1, greenSpace, selectedLocation, cityMap);
                     P.buildPark();
                 } else if (userChoice == 4) {
-                    PowerGenerator PG = new PowerGenerator("PG", 1, 500, selectedLocation);
+                    PowerGenerator PG = new PowerGenerator("PG", 1, 500, selectedLocation, cityMap);
                     PG.buildGenerator();
                 } else if (userChoice == 5) {
                     School S = new School("Sc", 1, selectedLocation, cityMap);
