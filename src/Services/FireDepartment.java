@@ -22,23 +22,24 @@ public class FireDepartment extends Service {
     }
 
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
         this.fireFightingCoverage += boostFireFightingCoverage; 
         int status = upgradeService();
         if (status == 0) {
-            return ("Not Enough Capital Balance!!");
+        	System.out.println("Not Enough Capital Balance!!");
         } else if (status == -1) {
-            return ("Service Already at maximum level");
+        	System.out.println("Service Already at maximum level");
         }
-        return ("Fire Department Upgraded :)");
+        System.out.println("Fire Department Upgraded :)");
     }
 
-    public boolean buildFireDepartment() {
+    public int buildFireDepartment() {
         int side = 2; // Calculating the length of the side of the fire department
 
         // Checks whether the area is available
         if (!(GameMap.isAreaAvailable(location.getX(), location.getY(), side, side))) {
-            return false;
+        	System.out.println("Selected Area is not available !!");
+        	return 0;
         }
 
         String[][] fireDepartment = new String[side][side]; // Declaring a new fire department using size
@@ -51,9 +52,11 @@ public class FireDepartment extends Service {
         }
 
         if (GameMap.placeObject(fireDepartment, location.getX(), location.getY())) {
-            return true;
+        	System.out.println("Fire Department Builded :)");
+        	return 1;
         } else {
-            return false;
+        	System.out.println("Retry !!");
+        	return 0;
         }
     }
     
@@ -76,18 +79,18 @@ public class FireDepartment extends Service {
     
     
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }

@@ -22,17 +22,17 @@ public class PoliceDepartment extends Service {
     }
 
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
         this.PoliceCoverage += boostPoliceCoverage; // Customizable boost value for Police coverage
         int status = upgradeService();
         if (status == 0) {
-            return ("Not Enough Capital Balance!!");
+        	System.out.println("Not Enough Capital Balance!!");
         } else if (status == -1) {
-            return ("Service Already at maximum level");
+        	System.out.println("Service Already at maximum level");
         } else if (buildPoliceDepartment()) {
-            return ("Police Department Upgraded :)");// Updating the Police department after Police coverage is updated
+        	System.out.println("Police Department Upgraded :)");// Updating the Police department after Police coverage is updated
         } else {
-            return ("Selected area is already occupied by an object!!");
+        	System.out.println("Selected area is already occupied by an object!!");
         }
     }
     
@@ -80,18 +80,18 @@ public class PoliceDepartment extends Service {
     
     
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }

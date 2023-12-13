@@ -40,22 +40,22 @@ public class School extends Service {
     
     // Implementing performUpgrade method inherited from Service class
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
     	if(RB.getPopulation() <= capacity*10) {
-    		return ("School capacity is enough for current population :)");
+    		System.out.println("School capacity is enough for current population :)");
     	}
     	
     	this.capacity += this.boostPercentage;
     	int status = upgradeService();
     	if(status == 0){
-    		return ("Not Enough Capital Balance!!");
+    		System.out.println("Not Enough Capital Balance!!");
     	}
     	else if(status == -1) {
-    		return ("Service Already at maximum level!!");
+    		System.out.println("Service Already at maximum level!!");
     	}
     	else {
     		RB.boostHappiness(this.boostPercentage);
-    		return ("School Upgraded Successfully :)");
+    		System.out.println("School Upgraded Successfully :)");
     	}
     }
     
@@ -79,13 +79,14 @@ public class School extends Service {
     
     
     // buildSchool() method for building school in the map
-    public boolean buildSchool() {
+    public int buildSchool() {
     	
 
     	String[][] school = new String[1][1];
     	
     	if(!(GameMap.isAreaAvailable(location.getX(), location.getY(), 1, 1))) {
-    		return false;
+    		System.out.println("Selected area is not available");
+    		return 0;
     	}
     	
     	int sc = 0x0001F3EB;
@@ -96,26 +97,28 @@ public class School extends Service {
     	
     	
     	if(GameMap.placeObject(school, location.getX(), location.getY())) {
-        	return true;
+    		System.out.println("School Built :)");
+    		return 1;
     	}
-    	return false;
+    	System.out.println("Retry !!");
+    	return 0;
     }
     
     
     // Implementation of destroyService() inherited from Service Class
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }
