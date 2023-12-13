@@ -23,17 +23,17 @@ public class Hospital extends Service {
     }
 
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
 
         this.healthcareCapacity += boostHealthcareCapacity; // Customizable boost value for health care capacity
         int status = upgradeService();
         if(status == 0) {
-        	return ("Not Enough Capital Balance!!");
+        	System.out.println("Not Enough Capital Balance!!");
         }
         else if(status == -1){
-        	return ("Service Already at maximum level");
+        	System.out.println("Service Already at maximum level");
         }
-        return ("Hospital Upgraded :)");
+        System.out.println("Hospital Upgraded :)");
     }
     
     
@@ -54,13 +54,14 @@ public class Hospital extends Service {
     }
     
 
-    public boolean buildHospital() {
+    public int buildHospital() {
     	
         int side = 2; // Calculating the length of the side of the hospital
     	
         // Checks whether area is available
         if (!(GameMap.isAreaAvailable(location.getX(), location.getY(), side, side))) {
-            return false;
+        	System.out.println("Selected Location not available!!");
+        	return 0;
         }
 
 
@@ -76,27 +77,29 @@ public class Hospital extends Service {
         
 
         if(GameMap.placeObject(hospital, location.getX(), location.getY())) {
-        	return true;
+        	System.out.println("Hospital Built :)");
+        	return 1;
         }
         else {
-        	return false;
+        	System.out.println("Retry !!");
+        	return 0;
         }
     }
     
     
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }

@@ -23,11 +23,11 @@ public abstract class Service{
     
     
     // Abstract method for checking the prerequisites for upgrading a service
-    public abstract String performUpgrade();
+    public abstract void performUpgrade();
     
    
     // Abstract method for deleting objects and resetting its data
-    public abstract String destroyService();
+    public abstract void destroyService();
     
     
     // Abstract method for clean removal of objects from the game map

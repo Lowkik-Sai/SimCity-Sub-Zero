@@ -5,7 +5,8 @@ import Main.*;
 import Services.*;
 import Util.*;
 import Buildings.*;
-import Infrastructure.*;
+import Infrastructure.Waste.*;
+import Infrastructure.Water.*;
 import Infrastructure.Power.*;
 import Economy.*;
 
@@ -76,6 +77,13 @@ public class App {
                 else if(userChoice == 8) {
                 	Hospital H = new Hospital("H", 1, 100, selectedLocation, cityMap);
                 	H.buildHospital();
+                }
+                else if(userChoice == 9) {
+                	WaterGenerator WG = new WaterGenerator("WG", 1, 300, 2, selectedLocation, cityMap);
+                	WG.buildWaterGenerator();
+                }
+                else if(userChoice == 10) {
+                	
                 }
             }
 

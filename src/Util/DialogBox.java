@@ -23,7 +23,8 @@ public class DialogBox {
                 "School",
                 "Fire Department",
                 "Police Department",
-                "Hospital"
+                "Hospital",
+                "Water Generator"
         };
 
         // Display the option dialog
@@ -63,12 +64,20 @@ public class DialogBox {
                 // User selected Hospital
                 return handleHospitalConfirmation();
             // Add cases for other building types if needed
+            case 9:
+            	
+            	return handleWaterGeneratorConfirmation();
             default:
                 return -1; // Default value for invalid choice
         }
     }
 
-    private static int handleResidentialBuildingConfirmation() {
+    private static int handleWaterGeneratorConfirmation() {
+		int buildCost = 12000;
+		return showConfirmationDialog("Water Generator", buildCost);
+	}
+
+	private static int handleResidentialBuildingConfirmation() {
         // Residential Building cost
         int buildCost = 5000;
         return showConfirmationDialog("Residential Building", buildCost);

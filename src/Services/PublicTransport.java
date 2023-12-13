@@ -66,25 +66,25 @@ public class PublicTransport extends Service {
     
     // Implementation of performUpgrade() method inherited from Service class
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
     	if(capacity > RB.getPopulation() * 0.01) {
-    		return ("Present Road transport is sufficient for the present population");
+    		System.out.println("Present Road transport is sufficient for the present population");
     	}
     	this.length += this.boostValue;
     	this.breadth += this.boostValue;
     	int status = upgradeService();
     	if(status == 0) {
-    		return ("Not Enough Capital Balance!!");
+    		System.out.println("Not Enough Capital Balance!!");
     	}
     	else if(status == -1){
-    		return ("Service already at maximum level :)");
+    		System.out.println("Service already at maximum level :)");
     	}
     	else if(buildTransport()) {
     		RB.boostHappiness(this.boostPercent);
-    		return ("Road Upgraded :)");
+    		System.out.println("Road Upgraded :)");
     	}
     	else {
-    		return ("Selected area is already occupied!!");
+    		System.out.println("Selected area is already occupied!!");
     	}
     }
     
@@ -109,18 +109,18 @@ public class PublicTransport extends Service {
     
     // Implementation of destroyService() for clean deletion of Road from map
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }

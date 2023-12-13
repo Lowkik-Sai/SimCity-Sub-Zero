@@ -37,13 +37,14 @@ public class Park extends Service {
     
     
     // buildPark() method for building park on the game map
-    public boolean buildPark() {
+    public int buildPark() {
         int side = (int) Math.sqrt(this.greenSpace);
         String[][] park = new String[side][side];
 
         // Checks whether the area is available
         if (!(GameMap.isAreaAvailable(location.getX(), location.getY(), side, side))) {
-            return false;
+            System.out.println("Selected Location Is Occupies Already");
+            return 0;
         }
 
         for (int i = 0; i <= park.length - 1; i++) {
@@ -67,10 +68,12 @@ public class Park extends Service {
 
         // Call placeObject and update the GameMap directly
         if (GameMap.placeObject(park, location.getX(), location.getY())) {
-            return true;
+            System.out.println("Park Builded :)");
+            return 1;
         }
 
-        return false;
+        System.out.println("Park Not Builded. Retry !!");
+        return 0;
     }
     
 
@@ -95,36 +98,36 @@ public class Park extends Service {
 
     // Implementation of performUpgrade() inherited from Service Class
     @Override
-    public String performUpgrade() {
+    public void performUpgrade() {
 
         this.greenSpace += boostgreenSpace; // Customizable boost value for health care capacity
         int status = upgradeService();
         if(status == 0) {
-        	return ("Not Enough Capital Balance!!");
+        	System.out.println("Not Enough Capital Balance!!");
         }
         else if(status == -1){
-        	return ("Service Already at maximum level");
+        	System.out.println("Service Already at maximum level");
         }
         // Boosting the happiness of the population once park is upgraded
         this.RB.boostHappiness(boostPercentage);
-        return ("Park Upgraded :)");
+        System.out.println("Park Upgraded :)");
     }
     
     
     // Implementation of destroyService() for clean deletion of park object
     @Override
-    public String destroyService() {
+    public void destroyService() {
     	int destructionCost = level * 1000;
     	if(capital.getCapital() - destructionCost < 0) {
-    		return ("Not Enough Capital Balance");
+    		System.out.println("Not Enough Capital Balance");
     	}
     	else {
     		capital.addToCapital(capital.getCapital() - destructionCost);
     		if(performDestruction()) {
-    			return("Service Destroyed");
+    			System.out.println("Service Destroyed");
     		}
     		else {
-    			return ("Service Not Destroyed!! Retry :)");
+    			System.out.println("Service Not Destroyed!! Retry :)");
     		}
     	}
     }
