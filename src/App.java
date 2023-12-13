@@ -65,7 +65,24 @@ public class App {
                 } else if (userChoice == 5) {
                     School S = new School("Sc", 1, selectedLocation, cityMap);
                     S.buildSchool();
+                } else if (userChoice == 6) {
+                	FireDepartment FD = new FireDepartment("FD", 1, 200, selectedLocation, cityMap);
+                	FD.buildFireDepartment();
                 }
+                else if(userChoice == 7) {
+                	PoliceDepartment PD = new PoliceDepartment("PD", 1, 200, selectedLocation, cityMap);
+                	PD.buildPoliceDepartment();
+                }
+                else if(userChoice == 8) {
+                	Hospital H = new Hospital("H", 1, 100, selectedLocation, cityMap);
+                	H.buildHospital();
+                }
+            }
+            else if(!(cityMap.isEmpty())) {
+            	Object_Identifier obj_Iden = new Object_Identifier();
+            	String unicode = obj_Iden.getUnicode(cityMap.getMap()[(int)lastClicked.getX()][(int)lastClicked.getY()]);
+            	String buildingName = points.getBuildingName(unicode);
+            	System.out.println("Clicked at:" + buildingName);
             }
 
             try {

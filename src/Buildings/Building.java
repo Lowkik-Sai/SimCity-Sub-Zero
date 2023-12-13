@@ -36,8 +36,8 @@ public abstract class Building {
 
     public void UpgradeBuilding(String building_id, int level){
         int cost = upgradeCost(level);
-        if (capital.checkSufficientCapital(cost)){
-            capital.setCapital(capital.getCapital()-cost);
+        if (capital.hasSufficientCapital(cost)){
+            capital.addToCapital(capital.getCapital()-cost);
             this.level += 1;
         }
         else{
