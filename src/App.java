@@ -47,7 +47,7 @@ public class App {
                 buildingFlags.put(lastClicked, 1);
 
                 if (userChoice == 0) {
-                    ResidentialBuilding RB = new ResidentialBuilding("R", selectedLocation, 1, cityMap);
+                    ResidentialBuilding RB = new ResidentialBuilding("R", selectedLocation, 1, cityMap, cityCapital);
                     RB.buildBuilding();
                 } else if (userChoice == 1) {
                     CommercialBuilding CB = new CommercialBuilding("C", selectedLocation, 1, cityMap);
