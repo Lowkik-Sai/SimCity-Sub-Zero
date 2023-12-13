@@ -1,8 +1,9 @@
 package Buildings;
 import Util.Location;
 import Main.GameMap;
+import Economy.Capital; // Import the Capital class
 
-public class ResidentialBuilding extends Building{
+public class ResidentialBuilding extends Building {
 	
 	private int Population;
 	private int Happiness;
@@ -11,13 +12,15 @@ public class ResidentialBuilding extends Building{
     private String id;
     private int level;
     private double boostpercentage;
+    private Capital capital; // Add a Capital instance variable
 
-    public ResidentialBuilding(String id, Location location, int level, GameMap gameMap) {
+    public ResidentialBuilding(String id, Location location, int level, GameMap gameMap, Capital capital) {
         this.id = id;
         this.location = location;
         this.level = level;
         this.GameMap = gameMap;
-        this.boostpercentage = .1;
+        this.boostpercentage = 0.1;
+        this.capital = capital; // Initialize the Capital instance
     }
 
     @Override
@@ -39,33 +42,24 @@ public class ResidentialBuilding extends Building{
         if (GameMap.placeObject(buildingMap, location.getX(), location.getY())) {
             // Additional logic if needed
             boostHappiness(boostpercentage);
+            capital.deductFromCapital(5000);
+            System.out.println("Capital after deduction: " + capital.getCapital());
             return true;
         } else {
             return false;
         }
     }
 
-
-    
-    public void payTaxes(int tax_amount) {
-    	if(capital.getCapital() - tax_amount < 0) {
-    		capital.setCapital(capital.getCapital() - tax_amount);
-    	}
-    	else {
-    		System.err.println("Not Enough Capital Balance");
-    	}
-    }
-    
     public int getHappiness() {
-    	return this.Happiness;
+        return this.Happiness;
     }
-    
+
     public int getPopulation() {
-    	return this.Population;
+        return this.Population;
     }
-    
+
     public void boostHappiness(double boostpercent) {
-    	this.Happiness += boostpercent;
+        this.Happiness += boostpercent;
     }
 
     @Override

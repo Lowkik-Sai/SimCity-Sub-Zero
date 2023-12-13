@@ -23,6 +23,14 @@ public class Capital {
         addToCapital(incomeEarned);
     }
 
+    public void deductFromCapital(int value) {
+        if (hasSufficientCapital(value)) {
+            capital -= value;
+        } else {
+            System.out.println("Insufficient funds to deduct: $" + value);
+        }
+    }
+
     public boolean hasSufficientCapital(int amount) {
         return amount <= capital;
     }

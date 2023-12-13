@@ -5,10 +5,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Economy.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GamePanel {
+public class GamePanel{
 
     private JPanel panel;
     private Point lastClickedCoordinates;
