@@ -6,7 +6,7 @@ Welcome to the SimCity-Sub-Zero Prototype, an exciting journey into the mechanic
 
 - **City Evolution:** Witness the growth of your city with basic population dynamics, economic rudiments, and preliminary infrastructure development.
 - **Resource Experimentation:** Delve into the foundational aspects of resource allocation, trying to strike a balance between citizen needs and the city's expansion aspirations.
-- **Interactive Elements:** Engage with simulated inhabitants, address initial concerns, and make rudimentary decisions to steer the trajectory of your budding metropolis.
+- **Interactive Elements:** Engage with simulated inhabitants, address initial concerns, maintain all your infrastructure and make rudimentary decisions to steer the trajectory of your budding metropolis.
 - **Code Exploration:** Dive into the early stages of Java programming as you explore a developing and modular codebase behind the SimCity-Sub-Zero Prototype.
 
 ## Why SimCity-Sub-Zero Prototype?
